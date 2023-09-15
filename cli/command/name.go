@@ -8,6 +8,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+
 func NameWithDefault(c *cli.Command, def string) {
 	flag := flags.Name
 	flag.DefaultText = def
@@ -23,9 +24,13 @@ func Name(c *cli.Command) {
 func attachName(c *cli.Command, flag cli.Flag) {
 	c.Flags = append(c.Flags, flag)
 
+	// If nothing is passed in as c.ArgsUsage, then Name is set to just name.
 	if len(c.ArgsUsage) == 0 {
+		// Same result as NameWithDefault function
 		c.ArgsUsage = "name"
 	} else {
+		// Attaches name string to name in the Name object
+		// Is the inclusion of the "name," string here for sorting purposes in the getName function?
 		c.ArgsUsage = "name," + c.ArgsUsage
 	}
 
